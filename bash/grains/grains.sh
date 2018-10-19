@@ -9,7 +9,8 @@ REQ=$1
 
 function main() {
   local input=$1
-  echo $(( 2 ** input ))
+  input=$(( input - 1 ))
+  echo $(( 2 ** input ))  
   return 0
 }
 

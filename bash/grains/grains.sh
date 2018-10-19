@@ -15,7 +15,12 @@ function main() {
 }
 
 if [[ "${REQ}" = 'total' ]]; then
-  echo $REQ
+  declare -i total
+  for i in {1..64}; do
+    declare -i next=$(main $i)
+    total=$(( total + next ))
+  done
+  echo $total
 elif (( 1<=REQ && REQ<=64)); then
   echo $(main $REQ)
 else

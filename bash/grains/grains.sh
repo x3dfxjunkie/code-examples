@@ -15,12 +15,13 @@ function main() {
 }
 
 if [[ "${REQ}" = 'total' ]]; then
-  declare -i total
+  declare -i total=0
+  declare -a square=()
   for i in {1..64}; do
-    declare -i next=$(main $i)
-    total=$(echo "${total} + ${next#-}" | bc )
+    square[$i]=$(main $i)
+    # total=$(echo "${total} + ${next#-}" | bc )
   done
-  echo $total
+  echo ${square[@]} | awk '{sum=0; for (i=1; i<=NF; i++) { sum+= $i } print sum}'
 elif (( 1<=REQ && REQ<=64)); then
   echo $(main $REQ)
 else
